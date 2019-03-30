@@ -60,14 +60,14 @@ for i in range(N):
 print("Вычисленное начение интеграла", S)
 print("Разность точного интеграла и вычисленного", abs(I - S))
 expr = "2 * cos(2.5 * x) * exp(x / 3) + 4 * sin(3.5 * x) * exp(-3 * x) + x"
-for i in range(N):
+for i in range(2*N):
     expr = diff(expr)
 dfx_e = expr.evalf(subs={"x": N//2})
-R_1 = integ.quad(lambda x: p(x) * omega(x) * dfx_e, a, b)[0] / factorial(N)
+R_1 = integ.quad(lambda x: p(x) * omega(x) ** 2 * dfx_e, a, b)[0] / factorial(2*N)
 print("Значение точной методической погрешности", R_1)
 dd = []
 for i in X:
     dd.append(abs(expr.evalf(subs={"x": i})))
 M = max(dd)
-R = (M / factorial(N)) * integ.quad(lambda x: abs(p(x) * omega(x)), a, b)[0]
+R = (M / factorial(2*N)) * integ.quad(lambda x: abs(p(x) * omega(x) ** 2), a, b)[0]
 print("Значение оценочной методической погрешности ", R)

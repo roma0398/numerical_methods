@@ -47,7 +47,7 @@ A = np.linalg.solve(X1, X2)
 z = A.tolist()
 z.append(1)
 rez = np.roots(z[::-1])
-rez = [i.real for i in rez]
+# rez = [i.real for i in rez]
 XZ = np.zeros([N, N])
 for i in range(N):
     for j in range(N):
@@ -63,8 +63,6 @@ expr = "2 * cos(2.5 * x) * exp(x / 3) + 4 * sin(3.5 * x) * exp(-3 * x) + x"
 for i in range(2*N):
     expr = diff(expr)
 dfx_e = expr.evalf(subs={"x": N//2})
-R_1 = integ.quad(lambda x: p(x) * omega(x) ** 2 * dfx_e, a, b)[0] / factorial(2*N)
-print("Значение точной методической погрешности", R_1)
 dd = []
 for i in X:
     dd.append(abs(expr.evalf(subs={"x": i})))
